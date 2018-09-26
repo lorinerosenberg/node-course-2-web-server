@@ -3,6 +3,11 @@ const hbs = require('hbs');
 const fs = require('fs');
 const app = express();
 
+// process.env stores all our environment key variables
+// heroku will automatically store a env key var for it's port
+// only exists when it runs from heroku so will need a default when it runs locally
+const port = process.env.PORT ||  3000;
+
 // where to find the reusable bits of code to use in different view files
 hbs.registerPartials(__dirname + '/views/partials')
 // views is default view files folder for express
@@ -72,6 +77,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
